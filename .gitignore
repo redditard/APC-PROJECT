@@ -1,0 +1,92 @@
+# Java / Maven
+target/
+**/target/
+!.mvn/wrapper/maven-wrapper.jar
+.mvn/wrapper/maven-wrapper.jar
+*.class
+*.jar
+*.war
+*.ear
+dependency-reduced-pom.xml
+release.properties
+
+# Spring Boot / logs
+logs/
+logs/*
+*.log
+*.log.*
+spring.log
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+.classpath
+.project
+.settings/
+
+# Node / Frontend
+node_modules/
+**/node_modules/
+dist/
+build/
+.vite/
+.vitepress/
+.next/
+.cache/
+.npm/
+.pnp.*
+yarn-error.log*
+npm-debug.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+.pnpm-store/
+
+# Vite dev server / env
+.env
+.env.*.local
+.local
+.env.local
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Docker
+docker-compose.override.yml
+docker-compose.*.yml
+**/Dockerfile.*
+
+# Logs / pids
+*.pid
+logs/pids/
+*.seed
+
+# Python / virtualenv (if present)
+__pycache__/
+*.py[cod]
+venv/
+.envrc
+.venv/
+
+# IDE backups / editors
+*~ 
+*.swp
+*.swo
+.history/
+
+# Misc
+coverage/
+coverage-final.json
+*.bak
+*.tmp
+
+# Generated config / secrets
+secrets.*
+credentials.json
+keystore.jks

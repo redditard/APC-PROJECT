@@ -1,0 +1,121 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOriginPatterns: "*"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+            allowCredentials: true
+      
+      routes:
+        - id: tourism-core-service
+          uri: lb://tourism-core-service
+          predicates:
+            # Support both legacy /api/* and current /api/v1/* prefixes from the frontend
+            - Path=/api/tours/**, /api/packages/**, /api/bookings/**, /api/auth/**, /api/users/**, /api/admin/**, /api/v1/tours/**, /api/v1/packages/**, /api/v1/bookings/**, /api/v1/auth/**, /api/v1/users/**, /api/v1/admin/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: tourism-core-cb
+                fallbackUri: forward:/fallback/tourism-core
+        
+        - id: itinerary-service
+          uri: lb://itinerary-service
+          predicates:
+            # Support both legacy /api/* and current /api/v1/* prefixes
+            - Path=/api/itineraries/**, /api/v1/itineraries/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: itinerary-cb
+                fallbackUri: forward:/fallback/itinerary
+        
+        # Service Documentation Routes
+        - id: core-service-docs
+          uri: lb://tourism-core-service
+          predicates:
+            - Path=/core-service/v3/api-docs/**, /core-service/swagger-ui/**
+          filters:
+            - StripPrefix=1
+        
+        - id: itinerary-service-docs
+          uri: lb://itinerary-service
+          predicates:
+            - Path=/itinerary-service/v3/api-docs/**, /itinerary-service/swagger-ui/**
+          filters:
+            - StripPrefix=1
+      
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+        - name: Retry
+          args:
+            retries: 3
+            methods: GET,POST,PUT,DELETE
+      
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    prefer-ip-address: true
+    hostname: localhost
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,gateway,circuitbreakers
+  endpoint:
+    health:
+      show-details: always
+    gateway:
+      enabled: true
+
+logging:
+  level:
+    com.tourism: DEBUG
+    org.springframework.cloud.gateway: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+
+# Circuit Breaker Configuration
+resilience4j:
+  circuitbreaker:
+    instances:
+      tourism-core-cb:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        permittedNumberOfCallsInHalfOpenState: 3
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 5s
+        failureRateThreshold: 50
+      
+      itinerary-cb:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        permittedNumberOfCallsInHalfOpenState: 3
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 5s
+        failureRateThreshold: 50
