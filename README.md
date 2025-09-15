@@ -2,7 +2,7 @@
 
 A microservices-based tourism management system built with Spring Boot, featuring tour packages, bookings, JWT authentication, and MongoDB integration.
 
-## 🏗️ Project Structure
+## Project Structure
 
 ```
 tourism-parent/
@@ -13,16 +13,17 @@ tourism-parent/
 └── eureka-server/           # Service discovery server
 ```
 
-## 🚀 Current Development Status
+## Current Development Status
 
-### ✅ Completed (Days 1-3)
+ 
+### Completed (Days 1-3)
 - [x] **Day 1**: Multi-module Maven project setup with all dependencies
 - [x] **Day 2**: Database design and entity creation (SQL + MongoDB)
 - [x] **Day 3**: Repository layer implementation with custom queries
 
-### 🔧 Current Phase: Phase 2 - Core Business Logic (Days 4-6)
+### Current Phase: Phase 2 - Core Business Logic (Days 4-6)
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Framework**: Spring Boot 3.1.5
 - **Database**: PostgreSQL + MongoDB
@@ -31,14 +32,14 @@ tourism-parent/
 - **Build Tool**: Maven
 - **Java Version**: 17
 
-## 📋 Prerequisites
+## Prerequisites
 
 - Java 17
 - Maven 3.6+
 - PostgreSQL 13+
 - MongoDB 4.4+
 
-## 🗄️ Database Setup
+## Database Setup
 
 ### PostgreSQL Setup
 ```sql
@@ -58,9 +59,10 @@ mongosh
 use tourism_db
 ```
 
-## 🚀 Running the Application
+## Running the Application
 
-### 🎯 Quick Start (Recommended)
+ 
+### Quick Start (Recommended)
 Use the automated startup script to launch all services:
 
 ```bash
@@ -74,14 +76,14 @@ Use the automated startup script to launch all services:
 ./stop-all-services.sh
 ```
 
-### 📊 Service Management Scripts
+### Service Management Scripts
 
 - **`./start-all-services.sh`** - Starts all microservices with health checks
 - **`./stop-all-services.sh`** - Gracefully stops all services
 - **`./check-services.sh`** - Shows service status and health
 - **`./check-services.sh watch`** - Continuously monitor services
 
-### 🔧 Manual Service Startup
+### Manual Service Startup
 
 If you prefer to start services individually:
 
@@ -113,7 +115,7 @@ mvn spring-boot:run
 ```
 Gateway at: http://localhost:8080
 
-## 📊 Database Schema
+## Database Schema
 
 ### SQL Entities (PostgreSQL)
 - **Tour**: Tour information with destinations and dates
@@ -124,14 +126,14 @@ Gateway at: http://localhost:8080
 ### MongoDB Documents
 - **BookingHistory**: Complete booking history with timeline tracking
 
-## 🔐 Security Features
+## Security Features
 
 - JWT-based authentication
 - Role-based access control (TOURIST, ADMIN)
 - Password encryption
 - Token validation and refresh
 
-## 📈 Next Steps (Following Timeline)
+## Next Steps (Following Timeline)
 
 ### Day 4: Tour & Package Services
 - Implement TourService with CRUD operations
@@ -148,7 +150,7 @@ Gateway at: http://localhost:8080
 - Add Bean Validation annotations
 - Configure MapStruct for entity-DTO mapping
 
-## 🧪 Testing
+## Testing
 
 ```bash
 # Run all tests
@@ -161,7 +163,7 @@ mvn clean install
 mvn clean install -DskipTests
 ```
 
-## 📝 API Documentation
+## API Documentation
 
 Once running, Swagger UI will be available at:
 - Core Service: http://localhost:8080/swagger-ui.html
@@ -169,7 +171,8 @@ Once running, Swagger UI will be available at:
 
 ## 🔧 Development Commands
 
-### 🏗️ Build & Test
+ 
+### Build & Test
 ```bash
 # Build all modules
 mvn clean install -DskipTests
@@ -181,7 +184,8 @@ mvn test
 cd [service-name] && mvn clean package
 ```
 
-### 🚀 Service Management
+ 
+### Service Management
 ```bash
 # Start all services
 ./start-all-services.sh
@@ -199,7 +203,8 @@ cd [service-name] && mvn clean package
 tail -f logs/tourism-core-service.log
 ```
 
-### 🔍 Debugging & Monitoring
+ 
+### Debugging & Monitoring
 ```bash
 # Check what's running on service ports
 lsof -i :8080,8081,8082,8761
@@ -215,10 +220,10 @@ curl http://localhost:8081/actuator/health
 curl http://localhost:8081/api/tours
 ```
 
-## 📞 Support
+## Support
 
 This project follows the detailed timeline in `tourism_timeline_no_docker.md`. Each phase builds upon the previous one, ensuring a complete microservices tourism management system.
 
 ---
 
-**Current Status**: Phase 1 Complete ✅ | Phase 2 In Progress 🔄
+**Current Status**: Phase 1 Complete | Phase 2 In Progress
